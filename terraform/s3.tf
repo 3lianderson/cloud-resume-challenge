@@ -31,6 +31,30 @@ resource "aws_s3_object" "frontend_index" {
   depends_on   = [aws_s3_bucket_website_configuration.frontend_bucket_website]
 }
 
+#resource "aws_s3_object" "frontend_error" {
+#  bucket       = aws_s3_bucket.frontend_bucket.id
+#  key          = "error.html"
+#  source       = "${path.module}/../frontend/error.html"
+#  etag         = filemd5("${path.module}/../frontend/error.html")
+#  content_type = "text/html"
+#  depends_on   = [aws_s3_bucket_website_configuration.frontend_bucket_website]
+#}
+
+resource "aws_s3_object" "styles_css" {
+  bucket       = aws_s3_bucket.frontend_bucket.bucket
+  key          = "css/styles.css"
+  source       = "${path.module}/../frontend/css/styles.css"
+  etag         = filemd5("${path.module}/../frontend/css/styles.css")
+  content_type = "text/css"
+}
+
+resource "aws_s3_object" "profile_image" {
+  bucket       = aws_s3_bucket.frontend_bucket.bucket
+  key          = "images/profile.jpg"
+  source       = "${path.module}/../frontend/images/profile.jpg"
+  etag         = filemd5("${path.module}/../frontend/images/profile.jpg")
+  content_type = "image/jpeg"
+}
 resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
   bucket = aws_s3_bucket.frontend_bucket.id
 
