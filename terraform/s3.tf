@@ -25,8 +25,8 @@ resource "aws_s3_bucket_website_configuration" "frontend_bucket_website" {
 resource "aws_s3_object" "frontend_index" {
   bucket       = aws_s3_bucket.frontend_bucket.id
   key          = "index.html"
-  source       = "${path.module}/../static/index.html"
-  etag         = filemd5("${path.module}/../static/index.html")
+  source       = "${path.module}/../frontend/index.html"
+  etag         = filemd5("${path.module}/../frontend/index.html")
   content_type = "text/html"
   depends_on   = [aws_s3_bucket_website_configuration.frontend_bucket_website]
 }
